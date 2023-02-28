@@ -11,6 +11,7 @@ export const getSongs = createAsyncThunk(
 export const addSong = createAsyncThunk(
     'songs/addSongs',
     async (data)=>{
+        console.log(data)
         const res = await customAxios.post('songs', data);
         return res.data
     }
@@ -18,7 +19,8 @@ export const addSong = createAsyncThunk(
 export const removeSong = createAsyncThunk(
     'blogs/removeBlogs',
     async (data)=>{
-        const res = await customAxios.delete('/blogs/'+ data);
+        console.log('data', data);
+        const res = await customAxios.delete('/songs/'+ data);
         return data
     }
 )

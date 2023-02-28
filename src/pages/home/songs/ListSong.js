@@ -3,7 +3,7 @@ import {useEffect} from "react";
 import {getSongs, removeSong} from "../../../services/songService";
 import {Link, useNavigate} from "react-router-dom";
 import swal from "sweetalert";
-import {getAlbums, removeAlbum} from "../../../services/albumService";
+
 
 
 
@@ -24,6 +24,7 @@ export default function ListSong(){
     })
 
 
+    const navigate = useNavigate()
     useEffect( ()=>{
         dispatch(getSongs())
     },[dispatch])
@@ -45,18 +46,15 @@ export default function ListSong(){
                 </thead>
                 <tbody>
                 {songs!== undefined && songs.map(item =>(
+
                     <tr>
                         <th scope="col">{item.idSong}</th>
+                        <th scope="col"><img src={item.image} style={{width:200, height:200}}/></th>
                         <th scope="col">{item.nameSong}</th>
-                        <th scope="col"> <div className="ml-3 form-group">
-                            <audio id="my_audio" controls preload="none">
-                                <source src="" type="audio/mp3"/>
-                            </audio>
-                        </div>
-                            <div className="ml-3 form-group">
-                                <button className="btn btn-primary" onClick="play_audio('play')">PLAY</button>
-                                <button className="btn btn-danger" onClick="play_audio('stop')">STOP</button>
-                            </div></th>
+
+                         <th scope="col"><audio preload={"audio"} controls>
+                             <source src={item.sound}/>
+                         </audio></th>
                         <th scope="col">{item.singer}</th>
                         <th scope="col">{item.author}</th>
                         <th scope="col">{item.nameCategory}</th>
@@ -72,6 +70,7 @@ export default function ListSong(){
                                     if (willDelete) {
                                         dispatch(removeSong(item.idSong)).then(() => {
                                             dispatch(getSongs()).then(() => {
+                                                navigate('/home')
 
                                             })
                                         })
@@ -81,7 +80,7 @@ export default function ListSong(){
                                     } else {
                                         swal("Khong xoa thanh cong!");
                                         dispatch(getSongs).then(() => {
-
+                                            navigate('/home')
                                         })
                                     }
                                 });

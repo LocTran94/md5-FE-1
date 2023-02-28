@@ -102,7 +102,8 @@ export default function AddSong() {
                     idCategory: '',
                     count: ''
                 }} onSubmit={(values) => {
-                    values.image = urls[0];
+                    values.image = urls[1];
+                    values.sound =  urls[0]
                     handleAdd(values)
 
                 }}>
@@ -130,25 +131,35 @@ export default function AddSong() {
                                 )}
                             </Field>
                         </div>
+
+
+                        <br/>
                         <div className="ml-3 form-group">
                             <label htmlFor="exampleInputPassword">Sound: </label>
-                            <Field type='text' className={'form-control'} name={'sound'}/>
+                            <Field type='file' onChange={handleChange} name={'sound'}>
+                            </Field>
+                            <button type='button' onClick={handleUpload}>Upload</button>
                         </div>
+
+
+                        <br/>
                         <div className="ml-3 form-group">
                             <label htmlFor="exampleInputPassword">Count: </label>
                             <Field type='number' className={'form-control'} name={'count'}/>
                         </div>
+
+
                         <div className="ml-3 form-group">
                             <label htmlFor="exampleInputPassword">Image: </label>
-                            <input type='file' onChange={handleChange}>
-                            </input>
+                            <Field type='file' onChange={handleChange} name={'sound'}>
+                            </Field>
                             <button type='button' onClick={handleUpload}>Upload</button>
                         </div>
-                        {urls.map((item) => (
-                            <>
-                                <img src={item} width={100} height={100}/>
-                            </>
-                        ))}
+                        {/*{urls.map((item) => (*/}
+                        {/*    <>*/}
+                        {/*        <img src={item} width={100} height={100}/>*/}
+                        {/*    </>*/}
+                        {/*))}*/}
                         <hr/>
                         <div className="ml-3 form-group">
                             <label htmlFor="exampleInputPassword">Category: </label>
